@@ -7,6 +7,7 @@ import Feature from "./components/feature";
 const getHomePageData = async () => {
   const res = await fetch(process.env.WP_GRAPHQL_ENDPOINT, {
     method: 'POST',
+    next: { revalidate: 3600 },
     headers: {
       "Content-Type": "application/json"
     },

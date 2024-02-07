@@ -1,5 +1,6 @@
 const getNavigationData = async () => {
   const res = await fetch(process.env.WP_GRAPHQL_ENDPOINT, {
+    next: { revalidate: 3600 },
     method: 'POST',
     headers: {
       "Content-Type": "application/json"

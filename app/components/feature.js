@@ -1,5 +1,4 @@
 const Feature = (props) => {
-
     const {copy, headline} = props || {};
     return(
         <section className="bg-white dark:bg-gray-900">
