@@ -29,6 +29,16 @@ const getHomePageData = async () => {
                     title
                     url
                   }
+                  heroImage {
+                    node {
+                      srcSet
+                      mediaDetails {
+                        height
+                        width
+                      }
+                      mediaItemUrl
+                    }
+                  }
                 }
               }
               ... on PageFieldsFieldsFeatureLayout {
