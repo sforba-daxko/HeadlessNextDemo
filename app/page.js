@@ -32,11 +32,16 @@ const getHomePageData = async () => {
                 }
               }
               ... on PageFieldsFieldsFeatureLayout {
-                fieldGroupName
+                __typename
                 feature {
                   copy
                   fieldGroupName
                   headline
+                  featureList {
+                    featureCopy
+                    featureTitle
+                    fieldGroupName
+                  }
                 }
               }
             }
@@ -58,26 +63,25 @@ const getHomePageData = async () => {
 
 const Home = async () => {
   const homeData = await getHomePageData();
-  const {fields} = homeData;
+  const {fields} = homeData || {};
 
   const renderComponents = () => {
     return fields && fields.map((field, index)=> {
       let component = null;
-      const {fieldGroupName} = field || {};
-      switch (fieldGroupName) {
+      const {__typename} = field || {};
+      switch (__typename) {
         case 'PageFieldsFieldsHeroLayout':
-          component = <Hero {...field?.hero} key={`${fieldGroupName}_${index}`}/>;
+          component = <Hero {...field?.hero} key={`${__typename}_${index}`}/>;
           break;
         case 'PageFieldsFieldsFeatureLayout':
-          component = < Feature {...field?.feature} key={`${fieldGroupName}_${index}`}/>;
+          component = < Feature {...field?.feature} key={`${__typename}_${index}`}/>;
           break;          
         default:
           component =<div key={`null_${index}`}/>;
           break;
       }
       return component;
-
-    })
+    });
   }
   return (
     <>
